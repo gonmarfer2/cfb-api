@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import requests
 import main.messages as messages
+from django.conf import settings
 
 
 # Create your views here.
@@ -17,12 +18,12 @@ def receive_github(request):
         type = request.headers["X-GitHub-Event"]
         data = request.data
 
-        post_discord("github",type,data)
+        post_discord_github(type,data)
         return Response({},status=status.HTTP_200_OK)
 
-def post_discord(type,subtype,data):
+def post_discord_github(type,data):
     try:
-        webhook,msg = build_message(type,subtype,data)
+        webhook,msg = build_message(type,data)
         msg_json = {
             "method":"POST",
             "headers":{
@@ -39,3 +40,14 @@ def build_message(type,subtype,data):
         return messages.github_messages(subtype,data)
     else:
         return "",dict()
+
+@api_view(['POST'])
+def receive_codacy(request):
+    if request.method == "POST":
+        post_discord_codacy(request.data)
+        return Response({},status=status.HTTP_200_OK)
+
+def post_discord_codacy(data):
+    webhook = settings.WEBHOOK_CODACY
+    msg = messages.build_codacy_msg(data)
+    requests.post(webhook, json=msg)

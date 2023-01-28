@@ -20,5 +20,6 @@ from main import views as main_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',main_views.main),
-    path('github',main_views.receive_github)
+    path('github',main_views.receive_github),
+    path('codacy',main_views.receive_codacy)
 ]
