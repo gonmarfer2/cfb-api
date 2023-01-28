@@ -17,19 +17,25 @@ def receive_github(request):
         type = request.headers["X-GitHub-Event"]
         data = request.data
 
-        post_discord(type,data)
+        post_discord("github",type,data)
         return Response({},status=status.HTTP_200_OK)
 
-def post_discord(type,data):
-    webhook,msg = messages.github_messages(type,data)
-    msg_json = {
-        "method":"POST",
-        "headers":{
-            "content-type":"application/json"
+def post_discord(type,subtype,data):
+    try:
+        webhook,msg = build_message(type,subtype,data)
+        msg_json = {
+            "method":"POST",
+            "headers":{
+                "content-type":"application/json"
+            }
         }
-    }
-    msg_json.update(msg)
-    print("="*90)
-    print(msg_json)
-    requests.post(webhook, json=msg_json)
+        msg_json.update(msg)
+        requests.post(webhook, json=msg_json)
+    except messages.UnknownMessageError:
+        pass
 
+def build_message(type,subtype,data):
+    if type == "github":
+        return messages.github_messages(subtype,data)
+    else:
+        return "",dict()
