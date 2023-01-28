@@ -17,6 +17,8 @@ def receive_github(request):
     if request.method == "POST":
         type = request.headers["X-GitHub-Event"]
         data = request.data
+        print("="*90)
+        print(data)
 
         post_discord_github(type,data)
         return Response({},status=status.HTTP_200_OK)
