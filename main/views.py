@@ -35,11 +35,8 @@ def post_discord_github(type,data):
     except messages.UnknownMessageError:
         pass
 
-def build_message(type,subtype,data):
-    if type == "github":
-        return messages.github_messages(subtype,data)
-    else:
-        return "",dict()
+def build_message(type,data):
+    return messages.github_messages(type,data)
 
 @api_view(['POST'])
 def receive_codacy(request):
