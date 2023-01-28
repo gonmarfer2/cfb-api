@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+WEBHOOK_WIKI_GRUPO1 = "https://discord.com/api/webhooks/1068658492698808450/8OPWJIg4Ba5jdEsDxqB48vWf9gMr16OiqbsLrb6y0hRnNS2kaB4A-hhVkBXc_rcRGqYg"
+WEBHOOK_WIKI_GRUPO2 = "https://discord.com/api/webhooks/1068658650127806585/6ol0xyZb6IlPOABTL8WlU2ETI1mKzmTwDvVDzEfwf1DG9YoYewfvnZGQvZHrWtbDPQhz"
+WEBHOOK_WIKI_GRUPO3 = "https://discord.com/api/webhooks/1068658761142640721/mgX7QI75cc8tLbwKr5-9c2la9StC43Xcl3gaUxQVyq9QLY2pjiO27uiMJJ3I6VycTk1C"
+WEBHOOK_ISSUES = "https://discord.com/api/webhooks/1068659660074262619/X41fGJ2ixDN0-H3tCnxIZSMXxz1jWkZjOrP8QwNFKDO2hWieNZ8qMXobdUziazYr92zs"
+WEBHOOK_ACTIONS = "https://discord.com/api/webhooks/1068659928589418506/jqj9Mrpmn9JvMiqrEOfJwUAoc3wRc6zPtYty56IJGi6Zfg77FB-6IGri9ozvWdlWYT8y"
