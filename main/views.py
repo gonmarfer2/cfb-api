@@ -16,9 +16,7 @@ def main(request):
 def receive_github(request):
     if request.method == "POST":
         type = request.headers["X-GitHub-Event"]
-        data = request.data
-        print("="*90)
-        print(data)
+        data = request.data["payload"][0]
 
         post_discord_github(type,data)
         return Response({},status=status.HTTP_200_OK)
@@ -43,6 +41,9 @@ def build_message(type,data):
 @api_view(['POST'])
 def receive_codacy(request):
     if request.method == "POST":
+        print("="*90)
+        print(request.data)
+
         post_discord_codacy(request.data)
         return Response({},status=status.HTTP_200_OK)
 
